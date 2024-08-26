@@ -253,6 +253,7 @@ struct CompressedRecord
   // Returns invalid_offset() if there is no edge to the destination.
   size_type LF(size_type i, node_type to) const;
 
+  //we call this range zkn
   // Returns Range::empty_range() if the range is empty or the destination is invalid.
   range_type LF(range_type range, node_type to) const;
 

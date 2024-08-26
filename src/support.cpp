@@ -650,6 +650,7 @@ CompressedRecord::runLF(size_type i, size_type& run_end) const
   return result;
 }
 
+//zkn this is the LF that we cal
 size_type
 CompressedRecord::LF(size_type i, node_type to) const
 {

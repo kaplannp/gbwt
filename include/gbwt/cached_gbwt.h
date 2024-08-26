@@ -255,6 +255,7 @@ public:
     return this->record(from).LF(range, to);
   }
 
+  //zkn this is the lf we use
   // On error: Range::empty_range().
   range_type LF(SearchState state, node_type to) const
   {

@@ -90,6 +90,12 @@ template<class GBWTType>
 SearchState
 extend(const GBWTType& index, SearchState state, node_type node)
 {
+  std::cerr << "node degree " << index.record(node).outdegree() << std::endl; 
+  std::cerr << "node <<" << node << ">>" << "outgoing edges ";
+  for (edge_type e : index.record(node).outgoing){
+    std::cerr << e << ", ";
+  }
+  std::cerr << std::endl;
   if(state.empty() || !(index.contains(node))) { return SearchState(); }
   state.range = index.LF(state, node);
   state.node = node;
@@ -100,11 +106,25 @@ template<class GBWTType, class Iterator>
 SearchState
 extend(const GBWTType& index, SearchState state, Iterator begin, Iterator end)
 {
+  std::cerr << "iterator they start equal>? ( " << (begin == end) << ")" << std::endl;
+  //Iterator beginCopy = begin;
+  //while (beginCopy != end){
+  //  //this is usually fine but not always
+  //  //assert(index.contains(static_cast<node_type>(*beginCopy)));
+  //  beginCopy++;
+  //}
+  //exit if 1) you finished query or 2) you haven't found anything
+  std::cerr << "og node " << state << std::endl;
   while(begin != end && !(state.empty()))
   {
     state = gbwt::extend(index, state, *begin);
     ++begin;
+    std::cerr << "state " << state.node << std::endl;
   }
+  //this pretty much always exits because we use query, not because we run out
+  //of state
+  std::cerr << "query finished " << (begin == end) << std::endl;
+  std::cerr << "state is empty " << state.empty() << std::endl;
   return state;
 }
 
